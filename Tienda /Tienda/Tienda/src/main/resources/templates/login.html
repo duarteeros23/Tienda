@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #0f172a, #1e3a8a, #38bdf8);
+        padding: 20px;
+    }
+
+    .contenedor {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .tarjeta {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        padding: 35px 30px;
+        text-align: center;
+        animation: aparecer 0.6s ease;
+    }
+
+    @keyframes aparecer {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .titulo {
+        font-size: 30px;
+        color: #0f172a;
+        margin-bottom: 10px;
+    }
+
+    .subtitulo {
+        font-size: 15px;
+        color: #475569;
+        margin-bottom: 25px;
+    }
+
+    .mensaje {
+        margin-bottom: 18px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .error {
+        background: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #fecaca;
+    }
+
+    .success {
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+    }
+
+    .campo {
+        margin-bottom: 18px;
+        text-align: left;
+    }
+
+    .campo label {
+        display: block;
+        font-size: 13px;
+        color: #64748b;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .campo input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #dbeafe;
+        border-radius: 14px;
+        font-size: 15px;
+        outline: none;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+    }
+
+    .campo input:focus {
+        border-color: #2563eb;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .boton {
+        width: 100%;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #2563eb, #0ea5e9);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+    }
+
+    .boton:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 24px rgba(37, 99, 235, 0.35);
+    }
+
+    .boton:active {
+        transform: scale(0.98);
+    }
+
+    @media (max-width: 480px) {
+        .tarjeta {
+            padding: 28px 22px;
+        }
+
+        .titulo {
+            font-size: 25px;
+        }
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+<div class="contenedor">
+    <div class="tarjeta">
+        <h2 class="titulo">Iniciar Sesion</h2>
+        <p class="subtitulo">Ingrese sus credenciales para continuar</p>
+        <div th:if="${param.error}" class="mensaje error">
+            Usuario o contraseña incorrecta
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="campo">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required>
+            </div>
+            <div class="campo">
+                <label for="password">Contraseña</label>
+                <input type="text" id="password" name="password" placeholder="Ingrese su contrase{a" required>
+            </div>
+
+            <button type="submit" class="boton">Ingresar</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
